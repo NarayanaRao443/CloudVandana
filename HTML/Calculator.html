@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+</head>
+<style>
+    * {
+        margin: 0px;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+
+    body {
+        background-color: rgb(83, 45, 45);
+    }
+    h1{
+        color: skyblue;
+        margin:30px;
+        margin-left: 500px;
+        padding: 30px;
+        font-weight: 400;
+    }
+    .container {
+        position: absolute;
+        left: 40%;
+        top: 20%;
+        transform: translate(-40%, -40%);
+    }
+
+    .result {
+        background-color: whitesmoke;
+        padding: 10px;
+        font-size: 20px;
+        height: 75px;
+    }
+
+    .input-field {
+        background-color: whitesmoke;      
+        font-size: 20px;
+        height: 50px;
+        text-align: left;
+        border: none;
+        outline: none;
+    }
+
+    .buttons {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        flex-wrap: wrap;
+        background-color: black;
+    }
+
+    .row {
+        display: flex;
+    }
+
+    .row button {
+        width: 75px;
+        height: 75px;
+        background-color: black;
+        color: white;
+        font-weight: 500;
+        font-style: normal;
+        font-size: large;
+        border: none;
+    }
+
+
+    .shadow
+    {
+        box-shadow: rgb(185 176 176 / 25%) 0px 54px 55px, rgb(151 146 146 / 12%) 0px -12px 30px, rgb(145 137 137 / 12%) 0px 4px 6px, rgba(240, 234, 234, 0.17) 0px 12px 13px, rgba(228, 222, 222, 0.09) 0px -3px 5px;
+
+
+    }
+
+    .clearAll {
+        position: absolute;
+        top: 0px;
+        align-items: center;
+        justify-content: center;
+        height: 75px;
+        width: 75px;
+        margin-left: 225px;
+        background-color: rgb(60, 169, 169);
+        color: white;
+        font-weight: 500;
+        font-size: larger;
+        border: none;
+    }
+
+    #separateColor {
+        background-color: gray;
+        border: none;
+    }
+</style>
+<body>
+    <h1>Calculator</h1>
+    <div class="container shadow" style="margin-top: 200px;">
+        <div class="result">
+            <input id="inputField" class="input-field" type="text" value="0" readonly>
+        </div>
+        <button class="clearAll" onclick="clearAll()">AC</button>
+
+        <div class="buttons">
+
+            <div class="row">
+                <button onclick="appendToInput('9')">9</button>
+                <button onclick="appendToInput('8')">8</button>
+                <button onclick="appendToInput('7')">7</button>
+                <button id="separateColor" onclick="appendToInput('+')">+</button>
+            </div>
+
+            <div class="row">
+                <button onclick="appendToInput('4')">4</button>
+                <button onclick="appendToInput('5')">5</button>
+                <button onclick="appendToInput('6')">6</button>
+                <button id="separateColor" onclick="appendToInput('-')">-</button>
+            </div>
+
+            <div class="row">
+                <button onclick="appendToInput('1')">1</button>
+                <button onclick="appendToInput('2')">2</button>
+                <button onclick="appendToInput('3')">3</button>
+                <button id="separateColor" onclick="appendToInput('/')">/</button>
+            </div>
+
+            <div class="row">
+                <button onclick="appendToInput('.')">.</button>
+                <button onclick="appendToInput('0')">0</button>
+                <button onclick="calculateResult()">=</button>
+                <button id="separateColor" onclick="appendToInput('*')">*</button>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        let currentValue = '0';
+
+        function appendToInput(value) {
+            if (currentValue === '0') {
+                currentValue = value;
+            } else {
+                currentValue += value;
+            }
+            document.getElementById('inputField').value = currentValue;
+        }
+
+        function calculateResult() {
+            try {
+                const result = eval(currentValue);
+                document.getElementById('inputField').value = result;
+                currentValue = result.toString();
+            } catch (error) {
+                document.getElementById('inputField').value = 'Error';
+                currentValue = '0';
+            }
+        }
+
+        function clearAll() {
+            currentValue = '0';
+            document.getElementById('inputField').value = currentValue;
+        }
+    </script>
+</body>
+</html>

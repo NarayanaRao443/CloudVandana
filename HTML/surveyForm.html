@@ -1,0 +1,192 @@
+<!-- I tried this and add entered values to the table format which are displayed on the browser; Please go through once -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survey Form</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: wheat;
+        }
+        h1{
+            color: maroon;
+            font-size: 23px;
+            margin: 10px;
+            margin-left: 350px;
+            padding: 5px;
+        }
+        form {
+            background-color: skyblue;
+            position: absolute;
+            top: 10%;
+            left: 10%;
+            border: 2px solid black;
+            margin-left: 120px;
+            padding: 20px;
+            line-height: 25px;
+            border-radius: 10px
+        }
+
+        label {
+            font-size: 17px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            margin-left: 50px;
+
+        }
+
+        input {
+            height: 28px;
+            border-radius: 5px;
+            color: black;
+            font-weight: 300;
+            font-size: 15px;
+            margin-left: 50px;
+        }
+
+        button {
+            margin-left: 50px;
+            width: 150px;
+            padding: 10px;
+            font-size: 15px;
+        }
+
+        select {
+            margin-left: 50px;
+        }
+
+        select,
+        option {
+            font-size: 15px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 78px auto;
+        }
+
+        th,
+        td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+            
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #e4baba;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #cb4444;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Survey Form</h1>
+    <div style="display: flex;">
+        <div style="width: 50%;">
+            <form action="" id="surveyForm">
+                <label for="fname">First Name</label> <br><input type="text" name="fname" id="fname"><br>
+
+                <label for="lname">Last Name</label><br> <input type="text" name="lname" id="lname" ><br>
+
+                <label for="dob">Date Of Birth</label> <br><input type="date" name="dob" id="dob" ><br>
+
+                <label for="country">Country</label><br>
+                <select name="country" id="country" >
+                    <option value="australia">Australia</option>
+                    <option value="bangladesh">Bangladesh</option>
+                    <option value="india">India</option>
+                    <option value="pakistan">Pakistan</option>
+                    <option value="srilanka">Sri Lanka</option>
+                </select><br>
+
+                <label for="gender" >Gender</label><br>
+                <input type="radio" name="gender" value="Male" id="male">Male
+                <input type="radio" name="gender" value="Female" id="female">Female
+                <br>
+
+                <label for="profession">Profession</label> <br><input type="text" name="profession" id="profession">
+                <br>
+
+                <label for="ema">Email</label><br> <input type="email" name="email" id="email" > <br>
+
+                <label for="mobile">Mobile Number</label><br> <input type="tel" maxlength="10" name="mobile" id="mobile"><br>
+                <br>
+                <button id="b1" onclick="submitSurveyForm(event)">Submit</button>
+                <button type="reset" onclick="resetData(event)">Reset</button>
+            </form>
+        </div>
+
+
+        <div style="width: 50%;">
+            <table id="dataTable">
+                <tr>
+                    <th>Field</th>
+                    <th>Value</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <script>
+            function submitSurveyForm(event) {
+                event.preventDefault();
+
+                const fname = document.getElementById("fname").value;
+                const lname = document.getElementById("lname").value;
+                const dob = document.getElementById("dob").value;
+                const email = document.getElementById("email").value;
+                const mobile = document.getElementById("mobile").value;
+
+                if (!fname || !lname || !dob || !email || !mobile) {
+                    alert('Please fill in all the required fields.');
+                    console.log('Please fill in all the required fields.')
+                } else {
+                    const form = document.getElementById("surveyForm");
+                    const formData = new FormData(form);
+
+                    const dataTable = document.getElementById("dataTable");
+                    let tableBody = dataTable.getElementsByTagName("tbody")[0];
+                    if (!tableBody) {
+                        tableBody = dataTable.createTBody();
+                    }
+
+                    formData.forEach(function (value, key) {
+                        const row = tableBody.insertRow();
+                        const cell1 = row.insertCell(0);
+                        const cell2 = row.insertCell(1);
+                        cell1.innerHTML = key;
+                        cell2.innerHTML = value;
+                    });
+                 
+            }
+                
+            
+            }
+           
+
+    </script>
+
+</html>
+
+
+</body>
+
+</html>
